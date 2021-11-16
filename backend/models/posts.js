@@ -2,15 +2,15 @@ const connection = require('../db/connection');
 
 const Post = function (post) {
     this.id = post.id ? post.id : null;
-    this.titre = post.titre ? post.titre : null;
     this.descrip = post.descrip ? post.descrip : null;
     this.image = post.image ? post.image : null;
     this.date_pub = post.date_pub ? post.date_pub : null;
     this.user_id = post.user_id ? post.user_id : null ;
+    this.titre = post.titre ? post.titre : null;
 }
 
 Post.createPost = (newPost, callback) => {
-    connection.query('INSERT INTO post (descrip,date_pub,user_id,titre) VALUES (?,?,NOW(),?,?)', [newPost.descrip, newPost.user_id, newPost.titre], (err, res) => {
+    connection.query('INSERT INTO post (descrip,date_pub,user_id,titre) VALUES (?,NOW(),?,?)', [newPost.descrip, newPost.user_id, newPost.titre], (err, res) => {
         if (err){
             throw err
         }
@@ -38,12 +38,15 @@ Post.deletePost = (delPost, callback) => {
     })
 }
 
-Post.getAllPost = (allPost, callback) => {
-    connection.query('SELECT * FROM post ORDER BY post.user_id = ?', [allPost.id], (err, res) =>{
+Post.getAllPost = (callback) => {
+    connection.query('SELECT * FROM post ', (err, res) =>{
         if (err) {
             throw err
         }
-        callback(null, res[0])
+        if(res.length){
+        callback(null, res);
+        return;
+        }
     })
 }
 

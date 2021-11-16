@@ -37,7 +37,7 @@ User.findOne = (email, callback) => {
     })
 };
 
-User.findAll = (id, callback) => {
+User.findById = (id, callback) => {
     connection.query(`SELECT * FROM users WHERE id = '${id}'`, (err, res) => {
         if (err) {
             // si erreur je passe pas de données
@@ -47,6 +47,21 @@ User.findAll = (id, callback) => {
         if (res.length) {
             // si j'ai pas d'erreur on envoie les données
             callback(null, res[0]);
+            return;
+        }
+    })
+}
+
+User.findAll = (callback) => {
+    connection.query(`SELECT * FROM users `, (err, res) => {
+        if (err) {
+            // si erreur je passe pas de données
+            callback(err, null);
+            return;
+        }
+        if (res.length) {
+            // si j'ai pas d'erreur on envoie les données
+            callback(null, res);
             return;
         }
     })

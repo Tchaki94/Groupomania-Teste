@@ -19,19 +19,21 @@ Comment.createComment = (newComment, callback) => {
     }) 
 }
 
-Comment.getAllComment = (allComment, callback) => {
+Comment.getAllComment = (callback) => {
 
-    connection.query('SELECT * FROM commentaires ORDER BY commentaires.user_id = ?', [allComment.id], (err, res) => {
+    connection.query('SELECT * FROM commentaires', (err, res) => {
         if ( err ) {
             throw err
         }
-        callback(null, res[0])
+        if (res.length) {
+        callback(null, res)
+        }
     })
 }
 
 Comment.getOneComment = (oneComment, callback) => {
 
-    connection.query('SELECT * FROM commentaires WHERE id= ?', [ oneComment.id], (err, res) => {
+    connection.query('SELECT * FROM commentaires WHERE id= ?', [oneComment.id], (err, res) => {
         if (err) {
             throw err
         }

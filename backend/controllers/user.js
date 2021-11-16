@@ -10,7 +10,7 @@ const fs = require("fs");
 exports.signup = (req, res) => {
     try{
     const name = req.body.name;
-    console.log(req.body)
+    //console.log(req.body)
     const email = req.body.email;
     const password = req.body.password;
 
@@ -56,9 +56,9 @@ exports.login = (req, res) => {
                 return res.status(401).json({ error: 'Mot de passe incorrect !' });
             }
             res.status(200).json({
-                userId: user._id,
+                userId: user.id,
                 token: jwt.sign(
-                    { userId: user._id },
+                    { userId: user.id },
                     'RANDOM_TOKEN_SECRET',
                     { expiresIn: '24h' }
                 )
@@ -69,12 +69,12 @@ exports.login = (req, res) => {
 
 // trouver un User
 
-exports.findOneUser = (req, res) => {
+exports.findByEmail = (req, res) => {
     const email = req.body.email;
 
-    User.findOne({
+    User.findOne(
         email
-    }, (err, data) => {
+    , (err, data) => {
         if ( err ) {
             return res.status(500).send({ message: err.message})
         }
@@ -82,14 +82,22 @@ exports.findOneUser = (req, res) => {
     })
 }
 
+//trouver un user par l'id passe en param
+exports.findOneUser = (req, res) => {
+    const id = req.params.id
+    User.findById(id, (err, data) => {
+        if ( err ) {
+            return res.status(500).send({ message: err.message})
+        }
+        res.status(200).send(data)
+    })
+}
 // trouver tout les user
 
 exports.findAllUsers = ( req, res ) => {
-    const id = req.params.id;
 
-    User.findAll({
-        id
-    }, (err, data) => {
+    User.findAll(
+        (err, data) => {
         if (err) {
             return res.status(500).send({message: err.message})
         }
@@ -97,3 +105,15 @@ exports.findAllUsers = ( req, res ) => {
     })
 }
 
+exports.findConnectedUser = (req, res) => {
+    //console.log('hello')
+    const id = req.userId
+    //console.log(id)
+    User.findById(id, (err, data) => {
+        if ( err ) {
+            return res.status(500).send({ message: err.message})
+        }
+        res.status(200).send(data)
+    })  
+
+}

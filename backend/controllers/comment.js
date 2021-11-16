@@ -13,7 +13,7 @@ exports.createComment = (req, res, next) => {
         comment
     }, (err, data) => {
         if (err) {
-            return res.status(500).send({message:  erro.message})
+            return res.status(500).send({message:  err.message})
         }
         return res.status(200).send(data)
     })
@@ -21,11 +21,9 @@ exports.createComment = (req, res, next) => {
 
 exports.getAllComment = (req, res) => {
 
-    const id = req.params.id;
 
-    Comment.getAllComment({
-        id
-    }, (err, data) => {
+    Comment.getAllComment(
+        (err, data) => {
         if ( err ) {
             return res.status(404).send({message: err.message})
         }
