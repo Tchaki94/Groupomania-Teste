@@ -89,7 +89,11 @@ exports.findOneUser = (req, res) => {
         if ( err ) {
             return res.status(500).send({ message: err.message})
         }
-        res.status(200).send(data)
+        const formattedData = {
+            name: data.name,
+            image: data.image
+        }
+        res.status(200).send(formattedData)
     })
 }
 // trouver tout les user
@@ -113,7 +117,14 @@ exports.findConnectedUser = (req, res) => {
         if ( err ) {
             return res.status(500).send({ message: err.message})
         }
+        
         res.status(200).send(data)
     })  
 
 }
+/*
+// supprimer un utilisateur
+export.deleteUser = ( req, res) => {
+
+}
+*/

@@ -10,7 +10,7 @@ const Comment = function (comment) {
 
 Comment.createComment = (newComment, callback) => {
 
-    connection.query('INSERT INTO commentaires (user_id, post_id, comment) VALUES (?,?,?)', [newComment.user_id, newComment.post_id, newComment.comment], (err, res) => {
+    connection.query('INSERT INTO comments (user_id, post_id, comment) VALUES (?,?,?)', [newComment.user_id, newComment.post_id, newComment.comment], (err, res) => {
         if (err){
             throw err
         }
@@ -21,7 +21,7 @@ Comment.createComment = (newComment, callback) => {
 
 Comment.getAllComment = (callback) => {
 
-    connection.query('SELECT * FROM commentaires', (err, res) => {
+    connection.query('SELECT * FROM comments', (err, res) => {
         if ( err ) {
             throw err
         }
@@ -33,11 +33,11 @@ Comment.getAllComment = (callback) => {
 
 Comment.getOneComment = (oneComment, callback) => {
 
-    connection.query('SELECT * FROM commentaires WHERE id= ?', [oneComment.id], (err, res) => {
+    connection.query('SELECT * FROM comments WHERE id= ?', [oneComment.id], (err, res) => {
         if (err) {
             throw err
         }
-        callback(null, res[0])
+        callback(null, res)
     })
 }
     
