@@ -21,12 +21,13 @@ Comment.createComment = (newComment, callback) => {
 
 Comment.getAllComment = (callback) => {
 
-    connection.query('SELECT * FROM comments', (err, res) => {
+    connection.query(`SELECT c.id, c.date_pub, c.comment, p.id as 'userId' FROM comments c INNER JOIN post p on c.user_id = p.id`, (err, res) => {
         if ( err ) {
             throw err
         }
         if (res.length) {
-        callback(null, res)
+        callback(null, res);
+        return;
         }
     })
 }
