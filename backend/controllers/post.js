@@ -1,5 +1,6 @@
 const database = require ('../db/connection');
 const Post = require('../models/posts');
+const Comment = require('../models/comment');
 
 exports.createPost = ( req, res, next) => {
 
@@ -64,11 +65,27 @@ exports.getAllPost = (req, res, next) => {
 
     Post.getAllPost(
         
-        (err, data) => {
+        (err, posts) => {
         if (err) {
+
             return res.status(404).send({message: err.message})
         }
-        return res.status(200).send(data)
+        Comment.getAllComment((err, comments) => {
+            if (err) {
+
+                return res.status(404).send({message: err.message})
+            }
+            comments.forEach(comment => {
+                postIndex = posts.findIndex(post => post.id == comment.postId)
+                if(posts[postIndex].comments !== undefined) {
+                    posts[postIndex].comments.push(comment)
+                }else{
+                    posts[postIndex].comments = [comment]
+                }                 
+            });
+            return res.status(200).send(posts)
+        })
+        
     })
 }
 

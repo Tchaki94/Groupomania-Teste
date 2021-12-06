@@ -14,14 +14,14 @@ Comment.createComment = (newComment, callback) => {
         if (err){
             throw err
         }
-        console.log(res);
+        //console.log(res);
         callback(null, {id: res.insertId, ...newComment})
     }) 
 }
 
 Comment.getAllComment = (callback) => {
 
-    connection.query(`SELECT c.id, c.date_pub, c.comment, p.id as 'userId' FROM comments c INNER JOIN post p on c.user_id = p.id`, (err, res) => {
+    connection.query(`SELECT c.id, c.date_pub, c.comment, p.id as 'postId' FROM comments c INNER JOIN post p on c.post_id = p.id`, (err, res) => {
         if ( err ) {
             throw err
         }

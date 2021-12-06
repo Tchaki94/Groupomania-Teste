@@ -19,7 +19,7 @@ exports.signup = (req, res) => {
     }
 
     if (name && email && password) {
-        console.log("ok")
+        //console.log("ok")
        
         bcrypt.hash(password, 10)
             .then(hash =>{
@@ -46,7 +46,7 @@ exports.signup = (req, res) => {
 // login de l'utilisateur ( login )
 exports.login = (req, res) => {
     User.findOne(req.body.email, (err, user) => {
-        console.log(user);
+        //console.log(user);
         if(err){
             return res.status(500).send({message: err.message})
         }
@@ -122,9 +122,16 @@ exports.findConnectedUser = (req, res) => {
     })  
 
 }
-/*
-// supprimer un utilisateur
-export.deleteUser = ( req, res) => {
 
+// supprimer un utilisateur
+exports.deleteUser = ( req, res) => {
+
+    const id = req.params.id
+
+    User.deleteUser(id, (err, data) => {
+        if (err) {
+            return res.status(500).send({ message: err.message})
+        }
+        res.status(200).send(data)
+    })
 }
-*/

@@ -14,7 +14,7 @@ Post.createPost = (newPost, callback) => {
         if (err){
             throw err
         }
-        console.log(res);
+        //console.log(res);
         callback(null, {id: res.insertId, ...newPost})
     }) 
 }
@@ -24,7 +24,7 @@ Post.modifyPost = (modPost, callback) => {
         if (err) {
             throw err
         }
-        console.log(res);
+        //console.log(res);
         callback(null, res[0])
     })
 }

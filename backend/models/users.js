@@ -12,12 +12,12 @@ const User = function (user) {
 };
 
 User.createUser = (newUser, callback) => {
-    console.log(newUser);
+    //console.log(newUser);
     connection.query('INSERT INTO users SET ?', newUser, (err, res) => {
         if (err){
             throw err
         }
-        console.log(res);
+        //console.log(res);
         callback(null, {id: res.insertId, ...newUser})
     })
 }
@@ -77,6 +77,7 @@ User.deleteUser = (id, callback) => {
         }
         if (res.length) {
             // si j'ai pas d'erreur on envoie les données
+            //console.log(res);
             callback(null, res);
             return;
         }

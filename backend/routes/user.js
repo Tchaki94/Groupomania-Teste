@@ -13,7 +13,7 @@ router.get("/all", userCtrl.findAllUsers);
 router.get('/:id', userCtrl.findOneUser);
 router.get('/', userCtrl.findByEmail);
 
-//router.delete('/delete/id', auth, userCtrl.deleteUser);
+router.delete('/delete/:id', auth, userCtrl.deleteUser);
 
 
 module.exports = router;
