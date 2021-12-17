@@ -3,7 +3,7 @@ const Comment = require('../models/comment');
 
 exports.createComment = (req, res, next) => {
 
-    const user_id = req.body.user_id;
+    const user_id = req.userId;
     const post_id = req.body.post_id;
     const comment = req.body.comment;
 

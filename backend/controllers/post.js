@@ -7,7 +7,7 @@ exports.createPost = ( req, res, next) => {
     const descrip = req.body.descrip;
     const date_pub = req.body.date_pub;
     //const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-    const user_id = req.body.user_id;
+    const user_id = req.userId;
     const titre = req.body.titre;
 
     Post.createPost({

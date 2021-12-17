@@ -126,7 +126,7 @@ exports.findConnectedUser = (req, res) => {
 // supprimer un utilisateur
 exports.deleteUser = ( req, res) => {
 
-    const id = req.params.id
+    const id = req.userId
 
     User.deleteUser(id, (err, data) => {
         if (err) {
