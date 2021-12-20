@@ -61,7 +61,7 @@ exports.deletePost = (req, res, next) => {
 }
 
 exports.getAllPost = (req, res, next) => {
-
+    console.log("hello");
 
     Post.getAllPost(
         
@@ -70,11 +70,13 @@ exports.getAllPost = (req, res, next) => {
 
             return res.status(404).send({message: err.message})
         }
+        
         Comment.getAllComment((err, comments) => {
             if (err) {
-
+                console.log(err)
                 return res.status(404).send({message: err.message})
             }
+            console.log(comments)
             comments.forEach(comment => {
                 postIndex = posts.findIndex(post => post.id == comment.postId)
                 if(posts[postIndex].comments !== undefined) {
@@ -83,6 +85,7 @@ exports.getAllPost = (req, res, next) => {
                     posts[postIndex].comments = [comment]
                 }                 
             });
+            console.log(posts);
             return res.status(200).send(posts)
         })
         

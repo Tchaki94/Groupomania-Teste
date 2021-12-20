@@ -32,7 +32,7 @@ app.use(helmet());
 connection.execute(
     'SELECT * FROM `users`',
     function(err, results, fields){
-        console.log("results", results);
+      //  console.log("results", results);
     }
 );
 connection.connect();

@@ -25,9 +25,12 @@ Comment.getAllComment = (callback) => {
         if ( err ) {
             throw err
         }
+        console.log(res.length)
         if (res.length) {
         callback(null, res);
         return;
+        }else{
+            callback(null, []);
         }
     })
 }
