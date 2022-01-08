@@ -6,14 +6,14 @@ exports.createPost = ( req, res, next) => {
 
     const descrip = req.body.descrip;
     const date_pub = req.body.date_pub;
-    //const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
     const user_id = req.userId;
     const titre = req.body.titre;
 
     Post.createPost({
         descrip,
+        image,
         date_pub,
-        //image,
         user_id,
         titre
     }, (err, data) => {

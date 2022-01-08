@@ -15,7 +15,7 @@ exports.createComment = (req, res, next) => {
         if (err) {
             return res.status(500).send({message:  err.message})
         }
-        return res.status(200).send(data)
+        return res.status(201).send(data)
     })
 }
 
