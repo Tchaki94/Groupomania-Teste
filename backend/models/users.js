@@ -75,7 +75,7 @@ User.deleteUser = (id, callback) => {
             callback(err, null);
             return;
         }
-        if (res.length) {
+        else {
             // si j'ai pas d'erreur on envoie les données
             //console.log(res);
             callback(null, res);

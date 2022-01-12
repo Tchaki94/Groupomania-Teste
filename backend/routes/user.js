@@ -5,7 +5,7 @@ const auth = require('../middlewares/auth');
 const userCtrl = require('../controllers/user');
 const multer = require('../middlewares/multer-config');
 
-router.post("/signup", userCtrl.signup);
+router.post("/signup", multer, userCtrl.signup);
 router.post("/login", userCtrl.login);
 
 router.get('/userBoard', auth, userCtrl.findConnectedUser)

@@ -10,11 +10,11 @@ const fs = require("fs");
 exports.signup = (req, res) => {
     try{
     const name = req.body.name;
-    //console.log(req.body)
     const email = req.body.email;
     const password = req.body.password;
+    const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
 
-    if (name === null || name === '' || email === null || email === '' || password === null || password === '') {
+    if (name === null || name === '' || email === null || email === '' || password === null || password === '' || image === null || image === "") {
         res.status(400).json({ error :"Veuillez remplir les champs du formulaire"});
     }
 
@@ -27,6 +27,7 @@ exports.signup = (req, res) => {
                     email: email,
                     name: name,
                     password: hash,
+                    image: image,
                     isadmin: false
                 }, (err, data) => {
                     if(err){
@@ -127,11 +128,13 @@ exports.findConnectedUser = (req, res) => {
 exports.deleteUser = ( req, res) => {
 
     const id = req.userId
+    console.log(id)
 
     User.deleteUser(id, (err, data) => {
         if (err) {
             return res.status(500).send({ message: err.message})
         }
+        console.log(data)
         res.status(200).send(data)
     })
 }
