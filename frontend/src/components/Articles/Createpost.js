@@ -6,7 +6,7 @@ import axios from "axios";
 function CreatePost() {
 
     const [user, setUser] = useState([]);
-
+	const [post, setPost] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {

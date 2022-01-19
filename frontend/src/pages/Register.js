@@ -1,11 +1,9 @@
 import { Router, Route } from "react-router-dom";
-import React, {useEffect, useState, useRef } from "react";
+import React, {useState, useRef } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-import Image from "react-bootstrap/Image";
-import { Button } from "react-bootstrap";
 
 import AuthService from "../services/auth.service";
 
@@ -57,12 +55,9 @@ function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [image, setImage] = useState(null);
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
-  const [preview, setPreview] = useState(null);
-	const userImg = useRef();
 
   const onChangeName = (e) => {
     const name = e.target.value;
@@ -79,36 +74,6 @@ function Register() {
     setPassword(password);
   };
 
-  useEffect(() => {
-		if (image) {
-			const reader = new FileReader();
-			reader.onloadend = () => {
-				setPreview(reader.result);
-			};
-			reader.readAsDataURL(image);
-		} else {
-			setPreview("../assets/black_avatar.png");
-		}
-	}, [image]);
-
-	const handleImageChange = (e) => {
-		const selected = e.target.files[0];
-		if (selected) {
-			setImage(selected);
-		} else {
-			setImage(null);
-		}
-	};
-	
-  const addImageBtn = () => {
-		userImg.current.click();
-	};
-
-  const confirmImg = () => {
-		userImg(userImg.current.files[0]);
-	};
-
-
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -118,7 +83,7 @@ function Register() {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(name, email, password, image).then(
+      AuthService.register(name, email, password).then(
         (response) => {
           console.log("register response", response);
           setMessage(response.data.message);
@@ -176,23 +141,6 @@ function Register() {
                   validations={[required, validEmail]}
                 />
               </div>
-
-              <Form className="signup__avatar text-center">
-                <Image src={preview} className="signup__avatar__img" roundedCircle />
-                <input
-                  type="file"
-                  accept="image/*"
-                  name="userImg"
-                  id="image"
-                  onChange={handleImageChange}
-                  ref={userImg}
-                  style={{ display: "none" }}
-                  onSubmit={confirmImg}
-                />
-                <Button className="avatar__btn" onClick={addImageBtn}>
-                  Ajouter une photo
-                </Button>
-              </Form>
 
               <div className="form-group">
                 <label htmlFor="password">Mot de passe</label>

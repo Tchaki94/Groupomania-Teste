@@ -12,9 +12,8 @@ exports.signup = (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
-    const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
 
-    if (name === null || name === '' || email === null || email === '' || password === null || password === '' || image === null || image === "") {
+    if (name === null || name === '' || email === null || email === '' || password === null || password === '') {
         res.status(400).json({ error :"Veuillez remplir les champs du formulaire"});
     }
 
@@ -27,7 +26,6 @@ exports.signup = (req, res) => {
                     email: email,
                     name: name,
                     password: hash,
-                    image: image,
                     isadmin: false
                 }, (err, data) => {
                     if(err){

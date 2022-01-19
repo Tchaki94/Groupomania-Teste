@@ -35,7 +35,7 @@ function PostList() {
 				//console.log(err);
 			});
 	}, []);
-	/*
+
     // récuperation user
 	useEffect(() => {
 		const id = JSON.parse(localStorage.getItem('user')).userId;
@@ -50,7 +50,7 @@ function PostList() {
 				setIsLoaded(true);
 				//console.log(err);
 			});
-	}, []); */
+	}, []);
 
     // recuperation + comment
 	const [comment, setComment] = useState();
@@ -83,23 +83,15 @@ function PostList() {
 	const handleComment = (e) => {
 		e.preventDefault();
 
-		const token = JSON.parse(localStorage.getItem("user")).token;
+		const id = JSON.parse(localStorage.getItem('user')).token;
+		//console.log(id);
 
-		let formData = new FormData();
-		formData.append("Comment", Comment);
-
-		axios.post("http://localhost:3000/api/comment", formData, {
-			headers: {
-				Authorization: "Bearer " + token,
-				"Content-Type": "multipart/form-data",
-			},
-		})
+		commentService.creatComment(id)
 		.then(() => {
 			console.log("Commentaire créé !");
             handleClose();
 		})
 		.catch((err) => console.log(err));
-		console.log(formData);
 };
 
 
@@ -149,10 +141,7 @@ function PostList() {
 				<div className="post_bottom">
 					<div className="post_bottomRight">
 						<div className="post_bottom_text">
-							{post.comments?.map(comment => (<div key={"comment"-comment.id}>{comment.username} : </div>))}
-						</div>
-						<div className="post_bottom_text">
-							 {post.comments?.map(comment => (<div key={"comment"-comment.id}>{comment.comment}</div>))}
+							{post.comments?.map(comment => (<div key={"comment"-comment.id}>{comment.username} : - posté le {comment.date_pub}<br></br> {comment.comment}<hr /></div>))}
 						</div>
 					</div>
 				</div>
@@ -165,7 +154,7 @@ function PostList() {
                         roundedCircle
                     />
                     <div className="CreateComment_text" onClick={handleShow} role="button">
-                        Bonjour {post.userName} ! Que souhaitez-vous commenter ?
+                        Bonjour {users.name} ! Que souhaitez-vous commenter ?
                     </div>
                 </Container>
                 <form>

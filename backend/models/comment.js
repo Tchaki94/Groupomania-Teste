@@ -14,7 +14,7 @@ Comment.createComment = (newComment, callback) => {
         if (err){
             throw err
         }
-        //console.log(res);
+        console.log(res);
         callback(null, {id: res.insertId, ...newComment})
     }) 
 }
