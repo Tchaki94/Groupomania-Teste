@@ -2,10 +2,11 @@ const database = require ('../db/connection');
 const Comment = require('../models/comment');
 
 exports.createComment = (req, res, next) => {
-
+    console.log(req.body);
     const user_id = req.userId;
     const post_id = req.body.post_id;
     const comment = req.body.comment;
+    
 
     Comment.createComment({
         user_id,

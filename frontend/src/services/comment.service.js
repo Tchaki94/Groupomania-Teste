@@ -15,8 +15,8 @@ const getOneComment = (id) => {
     return axios.get(API_URL + "/id", { headers: authHeader() });
 }
 
-const creatComment = (id) => {
-    return axios.post(API_URL + { headers: authHeader() });
+const creatComment = (comment) => {
+    return axios.post(API_URL , comment ,{ headers: authHeader() });
 }
 
 export default {

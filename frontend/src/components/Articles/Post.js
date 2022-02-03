@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Image, Modal, Row } from "react-bootstrap";
-import axios from "axios";
+
 import postService from "../../services/post.service";
 import userService from "../../services/user.service";
 import commentService from "../../services/comment.service"
@@ -12,8 +12,6 @@ function PostList() {
 
     const [posts, setPosts] = useState([]);
 	const [users, setUsers] = useState([]);
-	const [error, setError] = useState(null);
-
 	const [isLoaded, setIsLoaded] = useState(false);
 
 	
@@ -27,8 +25,7 @@ function PostList() {
 					setIsLoaded(true);
 					setPosts(response.data);
 					console.log(response);
-				}, 1000)
-				
+				}, 1000)	
 			})
 			.catch((err) => {
 				setIsLoaded(true);
@@ -54,58 +51,40 @@ function PostList() {
 
     // recuperation + comment
 	const [comment, setComment] = useState();
-	/*
-	useEffect(() => {
-		commentService.getAllComment()
-			.then((response) => {
-				setIsLoaded(true);
-				setComment(response.data);
-				//console.log(response);
-			})
-			.catch((err) => {
-				setIsLoaded(true);
-				//console.log(err);
-			});
-	}, []); */
-
-    const [show, setShow] = useState(false);
-	const handleClose = () => setShow(false);
-	const handleShow = () => {
-		setShow(true);
-	};
-    
-
-	const selectComment = (e) => {
-		setComment(e.target.value);
-	};
-
 
 	const handleComment = (e) => {
 		e.preventDefault();
-
-		const id = JSON.parse(localStorage.getItem('user')).token;
+		console.log(e.target.dataset)
+		const token = JSON.parse(localStorage.getItem('user')).token;
+		let newComment = {
+			post_id: e.target.dataset.postid,
+			comment: comment
+		}
+		console.log('nouveau commentaire', JSON.stringify(newComment))
+		
 		//console.log(id);
 
-		commentService.creatComment(id)
+		commentService.creatComment(newComment)
 		.then(() => {
 			console.log("Commentaire créé !");
-            handleClose();
 		})
 		.catch((err) => console.log(err));
-};
+    };
 
+	const selectTextComment = (e) => {
+		setComment(e.target.value);
+	};
 
 
     return(
         <>
 		{isLoaded && (<Container className="post">
-			{posts.map(post => (<div key={"post"+post.id} className="post_container">
+			{posts.map(post => (<article key={"post"+post.id} className="post_container" data-id={post.id}>
 				<div className="post_top">
 					<div className="post_topLeft">
 						<img
 							className="post_topLeft_img"
-							src={"./img/iconprof.png"
-							}
+							src={"./img/iconprof.png"}
 							alt="Profil"
 						/>
 						<span className="post_topLeft_username">
@@ -141,61 +120,36 @@ function PostList() {
 				<div className="post_bottom">
 					<div className="post_bottomRight">
 						<div className="post_bottom_text">
-							{post.comments?.map(comment => (<div key={"comment"-comment.id}>{comment.username} : - posté le {comment.date_pub}<br></br> {comment.comment}<hr /></div>))}
+							{post.comments?.map(comment => (<div key={"comment-" + comment.id}>{comment.username} : - posté le {comment.date_pub}<br></br> {comment.comment}<hr /></div>))}
 						</div>
 					</div>
 				</div>
 				<hr />
 				<>
-                <Container className="CreateComment">
-                    <Image
-                        src={"./img/iconprof.png"}
-                        className="CreateComment_avatar"
-                        roundedCircle
-                    />
-                    <div className="CreateComment_text" onClick={handleShow} role="button">
-                        Bonjour {users.name} ! Que souhaitez-vous commenter ?
-                    </div>
-                </Container>
-                <form>
-                    <Modal show={show} onHide={handleClose} animation={false}>
-                        <Modal.Header className="CreateComment_title">
-                            <Modal.Title>Créer un commentaire</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body className="CreateComment_modal">
-                            <Row>
-                                <Container>
-                                <Modal.Title>Votre commentaire</Modal.Title>
-                                    <Form.Control
-                                        as="textarea"
-                                        className="CreateComment_text"
-                                        onChange={selectComment}
-                                        placeholder="Description de votre commentaire ( 250 caractères max)"
-                                        maxLength="250"
-                                    />
-                                </Container>
-                            </Row>
-                        </Modal.Body>
-                        <Modal.Footer className="CreateComment__modal">
-                            <div className="CreateComment_btns">
-                                <Row>
-                                    <Col>
-                                        <Button className="CreateComment_btn" variant="secondary" onClick={handleClose}>
-                                            Annuler
-                                        </Button>
-                                    </Col>
-                                    <Col>
-                                        <Button className="CreateComment_btn" variant="primary" onClick={handleComment}>
-                                            Commenter
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </div>
-                        </Modal.Footer>
-                    </Modal>
-                </form>
+                <form className="sendComment" onSubmit={(e) => {e.preventDefault()}}>
+					<Image
+						src="./img/iconprof.png"
+						className="comment_avatar"
+						roundedCircle
+					/>
+					<input
+						as="textarea"
+						className="sendComment_input"
+						placeholder="Écrivez un commentaire..."
+						onChange={selectTextComment}
+						onKeyPress={(event) => event.key === "Enter" && handleComment()}
+					/>
+					<Image
+						type="submit"
+						src="./img/iconprof.png"
+						className="sendComment_icon"
+						roundedCircle
+						role="button"
+						onClick={() => handleComment()}
+					/>
+				</form>
             </>
-            </div>))
+            </article>))
             }
         </Container> )}
 	    {!isLoaded && (<p>Chargement...</p>)}
