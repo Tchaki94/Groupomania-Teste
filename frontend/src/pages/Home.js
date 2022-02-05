@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Posts from "../components/Articles/Post";
+import Posts from "../components/Articles/PostList";
 
 
 

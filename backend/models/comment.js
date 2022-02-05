@@ -15,7 +15,8 @@ Comment.createComment = (newComment, callback) => {
             throw err
         }
         console.log(res);
-        callback(null, {id: res.insertId, ...newComment})
+        Comment.getOneComment(res.insertId, callback)
+       /// callback(null, {id: res.insertId, ...newComment})
     }) 
 }
 
@@ -35,9 +36,9 @@ Comment.getAllComment = (callback) => {
     })
 }
 
-Comment.getOneComment = (oneComment, callback) => {
+Comment.getOneComment = (id, callback) => {
 
-    connection.query('SELECT * FROM comments WHERE id= ?', [oneComment.id], (err, res) => {
+    connection.query(`SELECT c.id, c.date_pub, c.comment, p.id as 'postId', u.name as 'username', u.image as 'userimage' FROM comments c INNER JOIN post p on c.post_id = p.id INNER JOIN users u on c.user_id = u.id WHERE c.id= ?`, [id], (err, res) => {
         if (err) {
             throw err
         }
