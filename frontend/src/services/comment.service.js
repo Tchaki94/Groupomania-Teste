@@ -19,9 +19,14 @@ const creatComment = (comment) => {
     return axios.post(API_URL , comment ,{ headers: authHeader() });
 }
 
+const deleteComment = (id) => { // suppression via ID
+    return axios.delete(API_URL + 'delete/' + id ,  { headers: authHeader() });
+};
+
 export default {
     getComment,
     getAllComment,
     getOneComment,
-    creatComment
+    creatComment,
+    deleteComment
 }

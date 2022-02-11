@@ -13,13 +13,12 @@ const getOnePost = () => { // recuperer 1 post
     return axios.get(API_URL +  { headers: authHeader() });
 }
 
-const getDeletePost = () => { // suprimer un post
-
-    return axios.get(API_URL + "delete", { headers: authHeader() })
-}
+const deletePost = (id) => { // suppression via ID
+    return axios.delete(API_URL + 'delete/' + id ,  { headers: authHeader() });
+};
 
 export default {
     getAllPost,
-    getDeletePost,
-    getOnePost
+    getOnePost,
+    deletePost
 };

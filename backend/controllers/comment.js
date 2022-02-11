@@ -44,3 +44,17 @@ exports.getOneComment = (req, res) => {
         return res.status(200).send(data)
     })
 }
+
+exports.deleteComment = (req, res) => {
+
+    const id = req.userId
+    console.log(id)
+
+    Comment.deleteComment(id, (err, data) => {
+        if (err) {
+            return res.status(500).send({ message: err.message})
+        }
+        console.log(data)
+        res.status(200).send(data)
+    })
+}

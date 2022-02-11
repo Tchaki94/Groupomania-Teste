@@ -29,12 +29,19 @@ Post.modifyPost = (modPost, callback) => {
     })
 }
 
-Post.deletePost = (delPost, callback) => {
-    connection.query('DELETE FROM post WHERE id = ?', [delPost.id], (err, res) => {
+Post.deletePost = (id, callback) => {
+    connection.query(`DELETE FROM post WHERE id = '${id}'`, (err, res) => {
         if (err) {
-            throw err
+            // si erreur je passe pas de données
+            callback(err, null);
+            return;
         }
-        callback(null, res[0])
+        else {
+            // si j'ai pas d'erreur on envoie les données
+            //console.log(res);
+            callback(null, res);
+            return;
+        }
     })
 }
 

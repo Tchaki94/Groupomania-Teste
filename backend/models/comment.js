@@ -45,6 +45,22 @@ Comment.getOneComment = (id, callback) => {
         callback(null, res)
     })
 }
+
+Comment.deleteComment = (id, callback) => {
+    connection.query(`DELETE FROM comments WHERE id = '${id}'`, (err, res) => {
+        if (err) {
+            // si erreur je passe pas de données
+            callback(err, null);
+            return;
+        }
+        else {
+            // si j'ai pas d'erreur on envoie les données
+            //console.log(res);
+            callback(null, res);
+            return;
+        }
+    })
+}
     
 
 module.exports = Comment;

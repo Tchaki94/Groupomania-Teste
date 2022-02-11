@@ -46,16 +46,15 @@ exports.modifyPost = (req, res, next) => {
     })
 }
 
-exports.deletePost = (req, res, next) => {
+exports.deletePost = (req, res) => {
 
-    const id = req.params.id;
+    const id = req.userId
  
-    Post.deletePost({
-        id
-    }, (err, data) => {
+    Post.deletePost(id, (err, data) => {
         if (err) {
-            return res.status(500).send({message: err.message})
+            return res.status(500).send({ message: err.message})
         }
+        console.log(data)
         res.status(200).send(data)
     })
 }
