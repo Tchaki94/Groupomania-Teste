@@ -4,9 +4,10 @@ const Comment = require('../models/comment');
 
 exports.createPost = ( req, res, next) => {
 
+    const image = req.file ?  `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : "";
+
     const descrip = req.body.descrip;
     const date_pub = req.body.date_pub;
-    const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
     const user_id = req.userId;
     const titre = req.body.titre;
 
@@ -48,14 +49,14 @@ exports.modifyPost = (req, res, next) => {
 
 exports.deletePost = (req, res) => {
 
-    const id = req.userId
+    const id = req.params.id;
  
     Post.deletePost(id, (err, data) => {
         if (err) {
             return res.status(500).send({ message: err.message})
         }
         console.log(data)
-        res.status(200).send(data)
+        return res.status(200).send(data)
     })
 }
 

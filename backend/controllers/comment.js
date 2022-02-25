@@ -47,7 +47,7 @@ exports.getOneComment = (req, res) => {
 
 exports.deleteComment = (req, res) => {
 
-    const id = req.userId
+    const id = req.params.id;
     console.log(id)
 
     Comment.deleteComment(id, (err, data) => {

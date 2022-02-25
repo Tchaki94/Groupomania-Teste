@@ -48,7 +48,7 @@ const vpassword = (value) => {
 };
 
 
-function Register() {
+function Register(props) {
 	const form = useRef();
   const checkBtn = useRef();
 
@@ -88,6 +88,7 @@ function Register() {
           console.log("register response", response);
           setMessage(response.data.message);
           setSuccessful(true);
+          props.history.push("/login");
         },
         (error) => {
           const resMessage =

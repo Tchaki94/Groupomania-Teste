@@ -38,7 +38,7 @@ Comment.getAllComment = (callback) => {
 
 Comment.getOneComment = (id, callback) => {
 
-    connection.query(`SELECT c.id, c.date_pub, c.comment, p.id as 'postId', u.name as 'username', u.image as 'userimage' FROM comments c INNER JOIN post p on c.post_id = p.id INNER JOIN users u on c.user_id = u.id WHERE c.id= ?`, [id], (err, res) => {
+    connection.query(`SELECT c.id,c.user_id, c.date_pub, c.comment, p.id as 'postId', u.name as 'username', u.image as 'userimage' FROM comments c INNER JOIN post p on c.post_id = p.id INNER JOIN users u on c.user_id = u.id WHERE c.id= ?`, [id], (err, res) => {
         if (err) {
             throw err
         }

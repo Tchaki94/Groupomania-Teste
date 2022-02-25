@@ -5,6 +5,8 @@ import postService from "../../services/post.service";
 import userService from "../../services/user.service";
 import commentService from "../../services/comment.service"
 
+import DeleteComments from "./DeleteComment";
+
 
 
 function PostList() {
@@ -120,6 +122,7 @@ function PostList() {
 							{post.comments?.map(comment => (<div key={"comment-" + comment.id}>{comment.username} : - posté le {comment.date_pub}<br></br> {comment.comment}<hr /></div>))}
 						</div>
 					</div>
+					
 				</article>
 				<hr />
 				<>
@@ -129,6 +132,7 @@ function PostList() {
 						onChange={selectTextComment}
 						onKeyPress={(event) => event.key === "Enter" && handleComment(post.id)}/>
 					<Image type="submit" src="./img/iconprof.png" className="sendComment_icon" roundedCircle data-postid={post.id} role="button" onClick={() => handleComment(post.id)}/>
+					
 				</form>
             </>
             </article>))

@@ -20,7 +20,7 @@ const creatComment = (comment) => {
 }
 
 const deleteComment = (id) => { // suppression via ID
-    return axios.delete(API_URL + 'delete/' + id ,  { headers: authHeader() });
+    return axios.delete(API_URL + '/delete/' + id ,  { headers: authHeader() });
 };
 
 export default {
