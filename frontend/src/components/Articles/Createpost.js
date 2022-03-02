@@ -6,7 +6,6 @@ import axios from "axios";
 function CreatePost() {
 
     const [user, setUser] = useState([]);
-	const [post, setPost] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -16,14 +15,13 @@ function CreatePost() {
 			.then((response) => {
 				setIsLoaded(true);
 				setUser(response.data);
-				console.log(response);	
+				//console.log(response);	
 			})
 			.catch((err) => {
 				setIsLoaded(true);
 				//console.log(err);
 			});
 	}, []);
-
 
 	const [imageContent, setImageContent] = useState(null);
 	const [previewContent, setPreviewContent] = useState(null);

@@ -1,12 +1,11 @@
 const bcrypt = require('bcrypt');
-//require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const User = require('../models/users');
 const fs = require("fs");
 
 
 
-// ajout d'un utilisateur ( newuser )
+// Ajout d'un utilisateur ( newuser )
 exports.signup = (req, res) => {
     try{
     const name = req.body.name;
@@ -56,6 +55,7 @@ exports.login = (req, res) => {
             }
             res.status(200).json({
                 userId: user.id,
+                isadmin: user.isadmin,
                 token: jwt.sign(
                     { userId: user.id },
                     'RANDOM_TOKEN_SECRET',
@@ -67,7 +67,6 @@ exports.login = (req, res) => {
 }
 
 // trouver un User
-
 exports.findByEmail = (req, res) => {
     const email = req.body.email;
 
@@ -95,8 +94,8 @@ exports.findOneUser = (req, res) => {
         res.status(200).send(formattedData)
     })
 }
-// trouver tout les user
 
+// trouver tout les user
 exports.findAllUsers = ( req, res ) => {
 
     User.findAll(

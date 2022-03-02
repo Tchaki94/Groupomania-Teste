@@ -6,17 +6,16 @@ import userService from "../../services/user.service";
 const BoardUser = (props) => {
 
     const [user, setUser] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);;
   
     useEffect(() => {
       const id = JSON.parse(localStorage.getItem('user')).userId;
-      console.log('idee', id);
+      //console.log('idee', id);
       userService.getUserById(id)
         .then((response) => {
           setIsLoaded(true);
           setUser(response.data);
-          console.log(response);	
+          //console.log(response);	
         })
         .catch((err) => {
           setIsLoaded(true);
@@ -27,19 +26,13 @@ const BoardUser = (props) => {
     const handleDelete = async () => {
       const confirmation = window.confirm("Voulez vous vraiment supprimer votre compte ?");
       const id = JSON.parse(localStorage.getItem('user')).userId;
-      if (!confirmation) return; console.log(id, confirmation)
+      if (!confirmation) return; //console.log(id, confirmation)
       const res = await userService.deleteUser(id)
-      console.log(res)
+      //console.log(res)
       localStorage.clear();
       props.logOut();
       props.history.push("/login");
     };
-
-    const [image, setImage] = useState(null);
-	  const [preview, setPreview] = useState(null);
-
-
-
   
     return (
       <Container className="profile">
@@ -66,6 +59,6 @@ const BoardUser = (props) => {
 		</Container>
 
     );
-  };
+};
   
   export default BoardUser;

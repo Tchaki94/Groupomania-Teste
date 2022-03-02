@@ -1,6 +1,8 @@
 const database = require ('../db/connection');
 const Comment = require('../models/comment');
 
+
+// création du profil
 exports.createComment = (req, res, next) => {
     console.log(req.body);
     const user_id = req.userId;
@@ -20,6 +22,7 @@ exports.createComment = (req, res, next) => {
     })
 }
 
+// Recuperer tout les commentaires
 exports.getAllComment = (req, res) => {
 
 
@@ -32,6 +35,7 @@ exports.getAllComment = (req, res) => {
     })
 }
 
+// Recuperer 1 commentaire
 exports.getOneComment = (req, res) => {
     const id = req.params.id;
 
@@ -45,6 +49,7 @@ exports.getOneComment = (req, res) => {
     })
 }
 
+// Supression commentaire
 exports.deleteComment = (req, res) => {
 
     const id = req.params.id;

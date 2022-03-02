@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Form, Image, Modal, Row } from "react-bootstrap";
+import { Container, Image } from "react-bootstrap";
 
 import postService from "../../services/post.service";
 import userService from "../../services/user.service";
 import commentService from "../../services/comment.service"
 
 import DeleteComments from "./DeleteComment";
-
-
 
 function PostList() {
 
@@ -16,17 +14,16 @@ function PostList() {
 	const [users, setUsers] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 
-	
 
 	// recuperation post
 	useEffect(() => {
 		postService.getAllPost()
 			.then((response) => {
-				console.log(response);
+				//console.log(response);
 				setTimeout(() => {
 					setIsLoaded(true);
 					setPosts(response.data);
-					console.log(response);
+					//console.log(response);
 				}, 1000)	
 			})
 			.catch((err) => {
@@ -38,7 +35,7 @@ function PostList() {
     // récuperation user
 	useEffect(() => {
 		const id = JSON.parse(localStorage.getItem('user')).userId;
-		console.log('idee', id);
+		//console.log('idee', id);
 		userService.getUserById(id)
 			.then((response) => {
 				setIsLoaded(true);
@@ -54,6 +51,9 @@ function PostList() {
     // recuperation + comment
 	const [comment, setComment] = useState();
 
+	const id = JSON.parse(localStorage.getItem('user')).userId;
+	const userAdmin = JSON.parse(localStorage.getItem('user')).isadmin;
+	
 	const handleComment = (postId) => {
 		
 		const token = JSON.parse(localStorage.getItem('user')).token;
@@ -67,7 +67,7 @@ function PostList() {
 
 		commentService.creatComment(newComment)
 		.then((response) => {
-			console.log(response)
+			//console.log(response)
 			// retrouver le bon post et actualiser la list de comments
 			const postIndex = posts.findIndex(p => p.id === response.data[0].postId)
 			posts[postIndex].comments.push(response.data[0])
@@ -79,7 +79,6 @@ function PostList() {
 	const selectTextComment = (e) => {
 		setComment(e.target.value);
 	};
-
 
     return(
         <>
@@ -119,7 +118,20 @@ function PostList() {
 				<article className="post_bottom">
 					<div className="post_bottomRight">
 						<div className="post_bottom_text">
-							{post.comments?.map(comment => (<div key={"comment-" + comment.id}>{comment.username} : - posté le {comment.date_pub}<br></br> {comment.comment}<hr /></div>))}
+							{post.comments?.map(comment => {
+								return (<div key={"comment-" + comment.id}>
+									{comment.username} : - posté le {comment.date_pub}<br></br>
+									{comment.comment}
+									{console.log('comId id userAdmin', comment, id, userAdmin)}
+									{comment.id === id || userAdmin === 1 ? (
+										<>
+										{console.log('hey')}
+										<DeleteComments comment={comment}  />
+										</>
+									) : null}
+									<hr />
+								</div>)
+							} )}
 						</div>
 					</div>
 					
@@ -142,5 +154,9 @@ function PostList() {
 	    </>
     )
 }
+
+/*
+
+*/
 
 export default PostList;

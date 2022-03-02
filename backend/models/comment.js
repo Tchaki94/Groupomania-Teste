@@ -14,7 +14,7 @@ Comment.createComment = (newComment, callback) => {
         if (err){
             throw err
         }
-        console.log(res);
+        //console.log(res);
         Comment.getOneComment(res.insertId, callback)
        /// callback(null, {id: res.insertId, ...newComment})
     }) 
@@ -26,7 +26,7 @@ Comment.getAllComment = (callback) => {
         if ( err ) {
             throw err
         }
-        console.log(res.length)
+        //console.log(res.length)
         if (res.length) {
         callback(null, res);
         return;

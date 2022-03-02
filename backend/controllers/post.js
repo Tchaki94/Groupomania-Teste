@@ -2,6 +2,7 @@ const database = require ('../db/connection');
 const Post = require('../models/posts');
 const Comment = require('../models/comment');
 
+// Creation d'un post
 exports.createPost = ( req, res, next) => {
 
     const image = req.file ?  `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : "";
@@ -27,6 +28,7 @@ exports.createPost = ( req, res, next) => {
     
 }
 
+// Modification d'un post 
 exports.modifyPost = (req, res, next) => {
 
     const descrip = req.body.descrip;
@@ -47,6 +49,7 @@ exports.modifyPost = (req, res, next) => {
     })
 }
 
+// Supression d'un post
 exports.deletePost = (req, res) => {
 
     const id = req.params.id;
@@ -60,6 +63,8 @@ exports.deletePost = (req, res) => {
     })
 }
 
+
+// Récuperation de tout les posts
 exports.getAllPost = (req, res, next) => {
     console.log("hello");
 
@@ -92,6 +97,7 @@ exports.getAllPost = (req, res, next) => {
     })
 }
 
+// Récuperation d'un Post
 exports.getOnePost = (req, res, next) => {
 
     const id = req.params.id;
