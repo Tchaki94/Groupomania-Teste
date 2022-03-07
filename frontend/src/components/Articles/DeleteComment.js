@@ -1,32 +1,46 @@
 import commentService from "../../services/comment.service";
 import {Image} from "react-bootstrap"
+import Img from "../../img/supr.png"
 
-const DeleteComments = () => {
+const DeleteComments = (props) => {
 
-    const deleteComment = () => {
+    const deleteComment = async () => {
 
         const confirmation = window.confirm("Êtes-vous sûr de vouloir supprimer ce commentaire?");
-        if (!confirmation) return console.log("Votre commentaire n'a pas été supprimé");
+        if (!confirmation) return console.log(id, confirmation);
 
-        const id = JSON.parse(localStorage.getItem('user'))
-        commentService.deleteComment(id)
-            .then(() => {
-                console.log("Commentaire supprimé");
+        const id = props.comment.id
+        const res= await commentService.deleteComment(id)
+        console.log(res)
+        if (res.data.affectedRows > 0 ) {
+            props.setPosts(oldPosts => {
+                let posts = [...oldPosts]
+                const postIndex = posts.findIndex(elt => elt.id === props.comment.postId)
+                const commentIndex = posts[postIndex].comments.findIndex(elt => elt.id === id)
+                posts[postIndex].comments.splice(commentIndex, 1)
+                return posts;
             })
-            .catch((err) => {
-                console.log(err, "Vous ne pouvez pas supprimer ce commentaire");
-                window.alert("Vous ne pouvez pas supprimer ce commentaire");
-            });
+        }
 
     }
 
     return (
 
         <>
-            <Image type="submit" src="./img/X.jpg" className="sendComment_icon" roundedCircle onClick={() => deleteComment()} />
+            <Image type="submit" src={Img} alt="Suppression" className="sendComment_Delete_icon" roundedCircle onClick={() => deleteComment()} />
         </>
     )
 
 }
 
 export default DeleteComments;
+
+/*
+.then(() => {
+                console.log("Commentaire supprimé");
+            })
+            .catch((err) => {
+                console.log(err, "Vous ne pouvez pas supprimer ce commentaire");
+                window.alert("Vous ne pouvez pas supprimer ce commentaire");
+            });
+*/

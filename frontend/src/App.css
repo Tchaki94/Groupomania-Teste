@@ -473,6 +473,19 @@ img {
 
 }
 
+.sendComment_Delete_icon {
+    width: 45px;
+    height: 40px;
+    display: flex;
+    align-items: flex-end;
+    margin-top: 20px;
+
+}
+
+.comment_delete {
+    color: #b10b0b;
+}
+
 .sendComment_icon:hover {
     filter: drop-shadow(0 0 10px #b19b54);
 }

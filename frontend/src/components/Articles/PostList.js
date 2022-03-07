@@ -51,7 +51,7 @@ function PostList() {
     // recuperation + comment
 	const [comment, setComment] = useState();
 
-	const id = JSON.parse(localStorage.getItem('user')).userId;
+	const userId = JSON.parse(localStorage.getItem('user')).userId;
 	const userAdmin = JSON.parse(localStorage.getItem('user')).isadmin;
 	
 	const handleComment = (postId) => {
@@ -119,14 +119,16 @@ function PostList() {
 					<div className="post_bottomRight">
 						<div className="post_bottom_text">
 							{post.comments?.map(comment => {
+								console.log(comment);
 								return (<div key={"comment-" + comment.id}>
 									{comment.username} : - posté le {comment.date_pub}<br></br>
 									{comment.comment}
-									{console.log('comId id userAdmin', comment, id, userAdmin)}
-									{comment.id === id || userAdmin === 1 ? (
+									{console.log('comId id userAdmin', comment, userId, userAdmin)}
+									{comment.userId === userId || userAdmin === 1 ? (
 										<>
 										{console.log('hey')}
-										<DeleteComments comment={comment}  />
+										<DeleteComments comment={comment}
+										setPosts = {setPosts}  />
 										</>
 									) : null}
 									<hr />
