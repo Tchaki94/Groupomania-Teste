@@ -72,6 +72,7 @@ function PostList() {
 			//console.log(response)
 			// retrouver le bon post et actualiser la list de comments
 			const postIndex = posts.findIndex(p => p.id === response.data[0].postId)
+			if(!posts[postIndex].comments){posts[postIndex].comments = []}
 			posts[postIndex].comments.push(response.data[0])
 			setPosts([...posts])
 		})
@@ -152,8 +153,7 @@ function PostList() {
 				{post.userId === userId || userAdmin === 1 ? (
 					<>
 					{console.log('hey')}
-					<DeletePosts post={post}
-					setPosts = {setPosts}  />
+					<DeletePosts post={post} setPosts = {setPosts}  />
 					</>
 				) : null}
             </>

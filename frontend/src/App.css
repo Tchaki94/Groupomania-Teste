@@ -393,6 +393,11 @@ img {
     align-items: center;
     justify-content: center;
 }
+
+.CreatePost_input {
+    width: 15px;
+    height: 15px;
+}
   
 /*@media only screen and (max-width: 665px) {
     .CreatePost_text {

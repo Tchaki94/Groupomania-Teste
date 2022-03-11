@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Container, Form, Image, Modal, Row } from "react-bootstrap";
 import userService from "../../services/user.service";
 import axios from "axios";
+import Img from "../../img/imgjpg.png"
 
 function CreatePost() {
 
@@ -24,7 +25,7 @@ function CreatePost() {
 	}, []);
 
 	const [imageContent, setImageContent] = useState(null);
-	const [previewContent, setPreviewContent] = useState(null);
+	const [previewContent, setPreviewContent] = useState(Img);
 	
 	const imgInputRef = useRef(null);
 	
@@ -36,7 +37,7 @@ function CreatePost() {
 			};
 			reader.readAsDataURL(imageContent);
 		} else {
-			setPreviewContent("./img/imgjpg.png");
+			setPreviewContent(Img);
 		}
 	}, [imageContent]);
 

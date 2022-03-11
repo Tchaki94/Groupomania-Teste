@@ -17,7 +17,7 @@ const DeletePosts = (props) => {
             props.setPosts(oldPosts => {
                 let posts = [...oldPosts]
                 const postIndex = posts.findIndex(elt => elt.id === id)
-                posts[postIndex].posts.splice(postIndex, 1)
+                posts.splice(postIndex, 1)
                 return posts;
             })
         }
@@ -36,14 +36,3 @@ const DeletePosts = (props) => {
 
 export default DeletePosts;
 
-/*
-if (res.data.affectedRows > 0 ) {
-            props.setPosts(oldPosts => {
-                let posts = [...oldPosts]
-                const index = posts.findIndex(elt => elt.id === props.post.id)
-                const postIndex = posts[index].post.findIndex(elt => elt.id === id)
-                posts[index].post.splice(postIndex, 1)
-                return posts;
-            })
-        }
-*/
