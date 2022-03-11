@@ -35,12 +35,3 @@ const DeleteComments = (props) => {
 
 export default DeleteComments;
 
-/*
-.then(() => {
-                console.log("Commentaire supprimé");
-            })
-            .catch((err) => {
-                console.log(err, "Vous ne pouvez pas supprimer ce commentaire");
-                window.alert("Vous ne pouvez pas supprimer ce commentaire");
-            });
-*/

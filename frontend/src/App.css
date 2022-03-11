@@ -4,14 +4,13 @@
 */
 
 .home-header {
-    background: linear-gradient(45deg, rgb(193, 69, 224), rgb(78, 78, 230) );
+    background: linear-gradient(45deg, rgb(241, 9, 9), rgb(20, 20, 230) );
     width: 100%;
     display: flex;
     align-items: center;
     height: 80px;
     top: 0;
 }
-
 
 .header-user {
     width: 50%;
@@ -52,6 +51,7 @@ hr {
     .img-groupo {
       display: none;
     }
+
   }
 
 label {
@@ -65,7 +65,7 @@ label {
 }
   
 .card {
-    background-color: #c79fdb;
+    background-color: #fd5353;
     padding: 20px 25px 30px;
     margin: 0 auto 25px;
     margin-top: 50px;
@@ -123,7 +123,7 @@ label {
     align-items: center;
 }
 .btn-secondary {
-    background-color: #c79fdb;
+    background-color: #e9c9c9;
     width: 20%;
     align-items: center;
     color: black;
@@ -280,7 +280,7 @@ label {
     border-radius: 15px;
     padding: 15px 15px;
     margin: 25px auto;
-    box-shadow: 3px 3px 14px 4px #c79fdb;
+    box-shadow: 2px 2px 10px 2px #cc8080;
     padding: 30px;
     background-color: whitesmoke;
 }
@@ -327,6 +327,14 @@ img {
     height: 35px;
     right: 10px;
     position: absolute;
+}
+
+.sendPost_Delete_icon {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: flex-end;
+    margin-top: 20px;
 }
 
 .CreatePost {
@@ -385,7 +393,6 @@ img {
     align-items: center;
     justify-content: center;
 }
-
   
 /*@media only screen and (max-width: 665px) {
     .CreatePost_text {
@@ -435,7 +442,6 @@ img {
     width: 100%;
 }
 
-
 /* commentaire 
 */
 .sendComment {
@@ -474,8 +480,8 @@ img {
 }
 
 .sendComment_Delete_icon {
-    width: 45px;
-    height: 40px;
+    width: 15px;
+    height: 15px;
     display: flex;
     align-items: flex-end;
     margin-top: 20px;
@@ -493,7 +499,6 @@ img {
 @media only screen and (max-width: 665px) {
     
 }
-
 
 .signup__avatar {
     display: flex;

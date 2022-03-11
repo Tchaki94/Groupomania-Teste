@@ -5,7 +5,9 @@ import postService from "../../services/post.service";
 import userService from "../../services/user.service";
 import commentService from "../../services/comment.service"
 
+import Img from "../../img/valide.png"
 import DeleteComments from "./DeleteComment";
+import DeletePosts from "./DeletePost";
 
 function PostList() {
 
@@ -145,9 +147,15 @@ function PostList() {
 					<input as="textarea" className="sendComment_input" placeholder="Écrivez un commentaire..."
 						onChange={selectTextComment}
 						onKeyPress={(event) => event.key === "Enter" && handleComment(post.id)}/>
-					<Image type="submit" src="./img/iconprof.png" className="sendComment_icon" roundedCircle data-postid={post.id} role="button" onClick={() => handleComment(post.id)}/>
-					
+					<Image type="submit" src={Img} className="sendComment_icon" roundedCircle data-postid={post.id} role="button" onClick={() => handleComment(post.id)}/>	
 				</form>
+				{post.userId === userId || userAdmin === 1 ? (
+					<>
+					{console.log('hey')}
+					<DeletePosts post={post}
+					setPosts = {setPosts}  />
+					</>
+				) : null}
             </>
             </article>))
             }
