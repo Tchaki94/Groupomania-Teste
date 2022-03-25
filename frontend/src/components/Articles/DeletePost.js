@@ -20,13 +20,10 @@ const DeletePosts = (props) => {
                 posts.splice(postIndex, 1)
                 return posts;
             })
-        }
-        
-        
+        }   
     }
 
     return (
-
         <>
             <Image type="submit" src={Img} alt="Suppression" className="sendPost_Delete_icon" roundedCircle onClick={() => deletePost()} />
         </>

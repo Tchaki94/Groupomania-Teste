@@ -52,6 +52,10 @@ hr {
       display: none;
     }
 
+    .sendComment_icon {
+        display: none;
+    }
+
   }
 
 label {
@@ -332,8 +336,6 @@ img {
 .sendPost_Delete_icon {
     width: 25px;
     height: 25px;
-    display: flex;
-    align-items: flex-end;
     margin-top: 20px;
 }
 
@@ -369,6 +371,7 @@ img {
 }
 
 .CreatePost_previewContainer {
+    width: 30%;
     max-height: 300px;
     border: 1px grey solid;
     border-radius: 15px;
