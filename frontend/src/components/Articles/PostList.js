@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Image } from "react-bootstrap";
-
+import formatDate from '../../services/formatDate';
 import postService from "../../services/post.service";
 import userService from "../../services/user.service";
 import commentService from "../../services/comment.service"
@@ -94,7 +94,7 @@ function PostList() {
 							{post.userName} 
 						</span>
 						<span className="post_topLeft_date">
-							- posté le {post.date_pub}
+							- posté le {formatDate(post.date_pub)}
 						</span>
 					</div>
 				</article>
@@ -124,9 +124,8 @@ function PostList() {
 							{post.comments?.map(comment => {
 								console.log(comment);
 								return (<div key={"comment-" + comment.id}>
-									{comment.username} : - posté le {comment.date_pub}<br></br>
+									{comment.username} : - posté le {formatDate(comment.date_pub)}<br></br>
 									{comment.comment}
-									{console.log('comId id userAdmin', comment, userId, userAdmin)}
 									{comment.userId === userId || userAdmin === 1 ? (
 										<>
 										{console.log('hey')}

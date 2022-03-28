@@ -21,11 +21,9 @@ const DeleteComments = (props) => {
                 return posts;
             })
         }
-
     }
 
     return (
-
         <>
             <Image type="submit" src={Img} alt="Suppression" className="sendComment_Delete_icon" roundedCircle onClick={() => deleteComment()} />
         </>
