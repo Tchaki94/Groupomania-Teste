@@ -48,12 +48,13 @@ const App = () => {
         <header className="home-header">
           <img className="img-groupo" alt="logo" src={logo}
               ></img>
-          <div className="header-navbar">
+          {currentUser && (
+              <div className="header-navbar">
               <Link to={"/home"} className="header-navbar-links">
                 Accueil
               </Link>
   
-            {currentUser && (
+          
               <div className="header-user">
                 <Link to={"/user"} className="header-navbar-links">
                   Profil
@@ -62,8 +63,8 @@ const App = () => {
                 Post
                 </Link>
               </div>
-            )}
           </div>
+          )}
   
           {currentUser ? (
             <div className="header-navbar">
