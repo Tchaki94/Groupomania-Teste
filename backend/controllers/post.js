@@ -7,10 +7,15 @@ exports.createPost = ( req, res, next) => {
 
     const image = req.file ?  `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : "";
 
-    const descrip = req.body.descrip;
+    const descrip = req.body.descrip ;
     const date_pub = req.body.date_pub;
     const user_id = req.userId;
     const titre = req.body.titre;
+
+    if(titre === null || titre === '' || descrip === null || descrip === '') {
+        return res.status(400).json({'error': "Veuillez remplir les champs 'titre' et 'description' pour créer un article"});
+    }
+
 
     Post.createPost({
         descrip,
@@ -25,7 +30,6 @@ exports.createPost = ( req, res, next) => {
         return res.status(201).send(data);
             
     })
-    
 }
 
 // Modification d'un post 

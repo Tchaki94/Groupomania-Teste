@@ -46,7 +46,7 @@ Post.deletePost = (id, callback) => {
 }
 
 Post.getAllPost = (callback) => {
-    connection.query(`SELECT p.id, p.titre, p.descrip, p.image, p.date_pub, u.name as 'userName', u.id as 'userId', u.image as 'userImage' FROM post p INNER JOIN users u on p.user_id = u.id`, (err, res) =>{
+    connection.query(`SELECT p.id, p.titre, p.descrip, p.image, p.date_pub, u.name as 'userName', u.id as 'userId', u.image as 'userImage' FROM post p INNER JOIN users u on p.user_id = u.id ORDER BY p.id DESC`, (err, res) =>{
         if (err) {
             throw err
         }

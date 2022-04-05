@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Col, Container, Form, Image, Modal, Row } from "react-bootstrap";
 import userService from "../../services/user.service";
+import Input from "react-validation/build/input";
 import axios from "axios";
 import Img from "../../img/imgjpg.png"
 
@@ -82,7 +83,7 @@ function CreatePost() {
 		setTitre(e.target.value);
 	};
 
-	
+
 
 
     const handlePost = (e) => {
@@ -130,6 +131,7 @@ function CreatePost() {
 							<Container>
 							<Modal.Title>Votre titre</Modal.Title>
 								<Form.Control
+									required
 									as="textarea"
 									className="CreatePost_text"
 									onChange={selectTitre}
@@ -167,6 +169,7 @@ function CreatePost() {
 							<Container>
 							<Modal.Title>Votre description</Modal.Title>
 								<Form.Control
+									required
 									as="textarea"
 									className="CreatePost_text"
 									onChange={selectDescrip}
@@ -185,7 +188,7 @@ function CreatePost() {
 									</Button>
 								</Col>
 								<Col>
-									<Button className="CreatePost_btn" variant="primary" onClick={handlePost}>
+									<Button className="CreatePost_btn" variant="primary" onClick={handlePost} >
 										Publier
 									</Button>
 								</Col>

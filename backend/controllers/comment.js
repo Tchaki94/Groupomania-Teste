@@ -4,11 +4,14 @@ const Comment = require('../models/comment');
 
 // création du profil
 exports.createComment = (req, res, next) => {
-    console.log(req.body);
+    //console.log(req.body);
     const user_id = req.userId;
     const post_id = req.body.post_id;
     const comment = req.body.comment;
-    
+
+    if (comment === null || comment === '') {
+        res.status(400).json({ error :"Veuillez écrire un commentaire"});
+    }
 
     Comment.createComment({
         user_id,
