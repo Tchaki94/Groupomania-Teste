@@ -92,6 +92,7 @@ function CreatePost() {
 		const token = JSON.parse(localStorage.getItem("user")).token;
 		//console.log(token);
 		let formData = new FormData();
+		if(descrip?.length > 0 && titre?.length > 0) {
 		formData.append("descrip", descrip);
 		formData.append("titre", titre);
 		formData.append("image", file);
@@ -107,6 +108,9 @@ function CreatePost() {
 			})
 			.catch((err) => console.log(err));
 			console.log(formData);
+		}else{
+			alert('Veuillez remplir tous les champs')
+		}
 	};
 
     return (

@@ -121,6 +121,7 @@ function Register(props) {
               <div className="form-group">
                 <label htmlFor="name">Nom</label>
                 <Input
+                  id="name"
                   type="text"
                   className="form-control"
                   name="name"
@@ -133,6 +134,7 @@ function Register(props) {
               <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <Input
+                  id="email"
                   type="text"
                   className="form-control"
                   name="email"
@@ -145,6 +147,7 @@ function Register(props) {
               <div className="form-group">
                 <label htmlFor="password">Mot de passe</label>
                 <Input
+                  id="password"
                   type="password"
                   className="form-control"
                   name="password"
@@ -172,7 +175,6 @@ function Register(props) {
               </div>
             </div>
           )}
-          <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
       </div>
     </div>

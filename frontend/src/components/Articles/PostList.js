@@ -57,7 +57,11 @@ function PostList() {
 	const userAdmin = JSON.parse(localStorage.getItem('user')).isadmin;
 	
 	const handleComment = (postId) => {
-		
+		console.log(comment)
+		if(comment === undefined || comment?.length < 2 ){
+			alert('entrer un commentaire de plus de 2 caracteres')
+			return
+		}
 		const token = JSON.parse(localStorage.getItem('user')).token;
 		let newComment = {
 			post_id: postId,

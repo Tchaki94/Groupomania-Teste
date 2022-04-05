@@ -82,6 +82,7 @@ function Login(props) {
           <div className="form-group">
             <label htmlFor="email">Mail</label>
             <Input
+              id="email"
               type="text"
               className="form-control"
               name="email"
@@ -94,6 +95,7 @@ function Login(props) {
           <div className="form-group">
             <label htmlFor="password">Mot de passe</label>
             <Input
+              id="password"
               type="password"
               className="form-control"
               name="password"
@@ -108,7 +110,7 @@ function Login(props) {
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}
-              <span>Connexion</span>
+              Connexion
             </button>
           </div>
 
@@ -119,7 +121,6 @@ function Login(props) {
               </div>
             </div>
           )}
-          <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
       </div>
     </div>

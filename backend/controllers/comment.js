@@ -8,9 +8,9 @@ exports.createComment = (req, res, next) => {
     const user_id = req.userId;
     const post_id = req.body.post_id;
     const comment = req.body.comment;
-
-    if (comment === null || comment === '') {
-        res.status(400).json({ error :"Veuillez écrire un commentaire"});
+    console.log(comment)
+    if (comment === null || comment === '' || comment === undefined) {
+       return res.status(400).json({ error :"Veuillez écrire un commentaire"});
     }
 
     Comment.createComment({

@@ -12,6 +12,7 @@ exports.signup = (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
+
     if (name === null || name === '' || email === null || email === '' || password === null || password === '') {
         res.status(400).json({ error :"Veuillez remplir les champs du formulaire "});
     }

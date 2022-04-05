@@ -12,6 +12,8 @@ exports.createPost = ( req, res, next) => {
     const user_id = req.userId;
     const titre = req.body.titre;
 
+    console.log(req.body)
+
     if(titre === null || titre === '' || descrip === null || descrip === '') {
         return res.status(400).json({'error': "Veuillez remplir les champs 'titre' et 'description' pour créer un article"});
     }
